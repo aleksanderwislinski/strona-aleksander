@@ -16,6 +16,7 @@
   --roz-blady:     #FCE7EA;
   --biel:          #FFFDF8;  /* Warm White — tło strony */
   --biel-czysta:   #FFFFFF;
+  --krem-cieply:   #F6EFDF;  /* tło wyróżnionych uwag */
   --tekst:         #36432C;
   --tekst-mig:     #5A6650;
   --kreska:        #DFE3D2;
@@ -119,6 +120,15 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 }
 .nav a:hover { border-bottom-color: var(--roz-jasny); }
 .topbar--scrolled .nav a { color: var(--tekst); }
+
+.lang-switch {
+  border: 1px solid currentColor !important;
+  padding: 0.35rem 0.7rem !important;
+  font-size: 0.78rem !important;
+  letter-spacing: 0.08em;
+}
+.lang-switch:hover { background: rgba(255,253,248,0.15); }
+.topbar--scrolled .lang-switch:hover { background: var(--zielen-blada); }
 
 .nav__cta {
   background: var(--roz-jasny);
@@ -254,6 +264,31 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
   gap: 2.5rem;
 }
 .prose-cols p { color: var(--tekst-mig); }
+
+/* Strona tekstowa (polityka prywatności) */
+.prose-page { max-width: 72ch; }
+.list-dash { list-style: none; margin: 0 0 1.2em; padding: 0; display: grid; gap: 0.7rem; }
+.list-dash li {
+  position: relative; padding-left: 1.5rem;
+  color: var(--tekst-mig); font-size: 0.97rem; line-height: 1.6;
+}
+.list-dash li::before {
+  content: ""; position: absolute; left: 0; top: 0.75em;
+  width: 10px; height: 1px; background: var(--zielen);
+}
+.prose-page h3 { margin-top: 2.2rem; }
+/* Na podstronach bez ciemnego nagłówka menu musi być czytelne od razu */
+.topbar--plain .brand, .topbar--plain .nav a { color: var(--tekst); }
+
+/* Wyróżniona uwaga w treści */
+.callout {
+  margin: 2.5rem 0 3rem;
+  padding: 1.5rem 1.8rem;
+  background: var(--krem-cieply, #F3E9D4);
+  border-left: 3px solid var(--roz);
+  font-size: 1.02rem;
+}
+.callout p:last-child { margin: 0; }
 
 /* =========================================================
    WYKSZTAŁCENIE I DOŚWIADCZENIE
@@ -524,6 +559,7 @@ a.booking__value:hover { color: var(--mech); }
   .nav--open { display: flex; }
   .nav a, .topbar--scrolled .nav a { color: var(--tekst); padding: 0.85rem 0; border-bottom: 1px solid var(--kreska); }
   .nav__cta { text-align: center; margin-top: 0.9rem; border-bottom: none !important; }
+  .lang-switch { text-align: center; border: none !important; padding: 0.85rem 0 !important; }
   .steps li { padding-right: 0; }
 }
 
