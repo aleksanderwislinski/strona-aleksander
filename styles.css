@@ -563,6 +563,12 @@ a.booking__value:hover { color: var(--mech); }
   .steps li { padding-right: 0; }
 }
 
+@media (max-width: 700px) {
+  .postcard { grid-template-columns: 1fr; gap: 0; }
+  .postcard__thumb img { aspect-ratio: 12 / 7; height: auto; }
+  .postcard__body { padding: 1.4rem 1.5rem; }
+}
+
 @media (max-width: 560px) {
   body { font-size: 16px; }
   .hero { padding-top: 8rem; }
@@ -573,4 +579,63 @@ a.booking__value:hover { color: var(--mech); }
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }
   html { scroll-behavior: auto; }
+}
+
+/* =========================================================
+   BLOG
+   ========================================================= */
+.postlist { display: grid; gap: 1.4rem; max-width: 76ch; }
+.postcard {
+  background: var(--biel-czysta);
+  border-top: 2px solid var(--zielen);
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr);
+  gap: 1.5rem;
+  align-items: stretch;
+  overflow: hidden;
+}
+.postcard__thumb { display: block; overflow: hidden; }
+.postcard__thumb img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+.postcard:hover .postcard__thumb img { transform: scale(1.04); }
+.postcard__body { padding: 1.5rem 1.5rem 1.5rem 0; }
+.postcard__date {
+  font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--mech); margin-bottom: 0.6rem;
+}
+.postcard h3 { margin-bottom: 0.5em; }
+.postcard h3 a { color: var(--tekst); text-decoration: none; }
+.postcard h3 a:hover { color: var(--mech); }
+.postcard p:last-child { margin: 0; font-size: 0.95rem; color: var(--tekst-mig); }
+
+/* Pojedynczy wpis */
+.post { max-width: 68ch; }
+.post h2 { margin-bottom: 0.5em; }
+.post h3 { margin-top: 2.2rem; }
+.post p { color: var(--tekst-mig); }
+.post__lead { font-size: 1.12rem; color: var(--tekst) !important; }
+.post__cta {
+  margin: 2.5rem 0 1.5rem;
+  padding: 1.4rem 1.6rem;
+  background: var(--roz-blady);
+  border-left: 3px solid var(--roz);
+}
+.post__cta p:last-child { margin: 0; }
+.post__back { font-size: 0.93rem; }
+.post__back a { text-decoration: none; }
+
+/* Zdjęcie ilustracyjne we wpisie */
+.post__figure { margin: 2rem 0 2.5rem; }
+.post__figure img {
+  width: 100%;
+  aspect-ratio: 12 / 7;
+  object-fit: cover;
+}
+.post__figure figcaption {
+  margin-top: 0.6rem;
+  font-size: 0.82rem;
+  color: var(--tekst-mig);
 }
