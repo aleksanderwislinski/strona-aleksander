@@ -137,6 +137,11 @@
         <a class="btn btn--blush" href="#kontakt">Umów konsultację</a>
         <a class="btn btn--outline-light" href="#oferta">Cennik</a>
       </div>
+
+      <p class="hero__free">
+        Nie wiesz, od czego zacząć? W środy prowadzę
+        <a href="#oferta">bezpłatne 15-minutowe konsultacje telefoniczne</a>.
+      </p>
     </div>
 
     <figure class="portrait">
@@ -336,6 +341,13 @@
     </header>
 
     <div class="offers">
+      <article class="offer offer--free">
+        <h3>Bezpłatna konsultacja wstępna</h3>
+        <p>Krótka rozmowa telefoniczna, podczas której możesz opowiedzieć, z czym się zmagasz, i dowiedzieć się, jaka forma wsparcia będzie odpowiednia. Bez zobowiązań.</p>
+        <p class="offer__meta">telefonicznie · środy 8:00–10:00</p>
+        <p class="offer__price"><span>bezpłatnie</span> / 15 min</p>
+      </article>
+
       <article class="offer">
         <h3>Konsultacja psychologiczna indywidualna</h3>
         <p>Dla osób dorosłych. Rozmawiamy o tym, z czym przychodzisz, i wspólnie ustalamy kierunek pracy.</p>
@@ -549,6 +561,23 @@
 </main>
 
 <!-- =========================================================
+     OKIENKO Z BEZPŁATNĄ KONSULTACJĄ
+     Pojawia się raz na 7 dni, po 20 sekundach albo po przewinięciu
+     połowy strony. Żeby je wyłączyć, usuń cały ten blok
+     oraz skrypt oznaczony "OKIENKO" na dole pliku.
+     ========================================================= -->
+<aside class="popup" id="popup" role="dialog" aria-labelledby="popupTitle" aria-modal="false" hidden>
+  <button class="popup__close" id="popupClose" aria-label="Zamknij okienko">&times;</button>
+  <p class="popup__label">Pierwszy krok</p>
+  <h3 class="popup__title" id="popupTitle">Bezpłatna konsultacja wstępna</h3>
+  <p class="popup__text">
+    15 minut przez telefon, w środy między 8:00 a 10:00. Opowiedz, z czym przychodzisz,
+    a wspólnie zastanowimy się, co dalej. Bez zobowiązań.
+  </p>
+  <a class="btn btn--dark popup__cta" href="https://www.znanylekarz.pl/aleksander-wislinski/psycholog/gdansk" target="_blank" rel="noopener">Zarezerwuj termin</a>
+</aside>
+
+<!-- =========================================================
      STOPKA
      ========================================================= -->
 <footer class="footer">
@@ -601,6 +630,38 @@
 
   // Aktualny rok w stopce
   document.getElementById('rok').textContent = new Date().getFullYear();
+
+  // ===== OKIENKO Z BEZPŁATNĄ KONSULTACJĄ =====
+  // Pokazuje się od razu po wejściu, przy każdej wizycie.
+  // Zamyka się krzyżykiem, klawiszem Escape, kliknięciem obok
+  // albo kliknięciem przycisku rezerwacji.
+  (function () {
+    var popup = document.getElementById('popup');
+    var close = document.getElementById('popupClose');
+
+    popup.hidden = false;
+    requestAnimationFrame(function () { popup.classList.add('popup--widoczne'); });
+
+    function zamknij() {
+      popup.classList.remove('popup--widoczne');
+      setTimeout(function () { popup.hidden = true; }, 300);
+      document.removeEventListener('click', pozaOknem, true);
+    }
+
+    // Kliknięcie gdziekolwiek poza okienkiem też je zamyka
+    function pozaOknem(e) {
+      if (!popup.hidden && !popup.contains(e.target)) zamknij();
+    }
+    setTimeout(function () {
+      document.addEventListener('click', pozaOknem, true);
+    }, 400);
+
+    close.addEventListener('click', zamknij);
+    popup.querySelector('.popup__cta').addEventListener('click', zamknij);
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !popup.hidden) zamknij();
+    });
+  })();
 
   // Zmiana wyglądu menu po przewinięciu strony
   var topbar = document.getElementById('topbar');
